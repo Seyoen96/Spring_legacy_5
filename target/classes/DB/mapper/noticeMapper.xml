@@ -5,6 +5,8 @@
 
   <mapper namespace="com.sy.s5.notice.NoticeDAO">
   
+  
+  	<!-- Notice -->
 	<!-- 전체 글의 갯수 -->  
   	<select id="boardCount" resultType="java.lang.Long">
   		select count(num) from notice  	
@@ -16,8 +18,6 @@
 				(select * from notice where num>=1 order by num desc) N)
 		where R between #{startRow} and #{lastRow}
   	</select>
-  
-  
   
   	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.sy.s5.notice.NoticeDTO">
   		select * from notice where num = #{num}
@@ -38,6 +38,19 @@
   	<update id="hitUpdate" parameterType="java.lang.Long">
   		update notice set hit=hit+1 where num=#{num}
   	</update>
+  	
+  	
+  	
+  	 <!-- Qna -->
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	
   	
   	
   </mapper>
