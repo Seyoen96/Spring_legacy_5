@@ -1,8 +1,8 @@
 package com.sy.s5.notice;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +21,19 @@ public class NoticeDAO implements BoardDAO {
 	
 	//noticeList
 	@Override
-	public List<BoardDTO> boardList() throws Exception {
-		
-		return null;
+	public List<BoardDTO> boardList(Map<String, Integer> map) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"boardList",map);
 	}
 	
 	@Override
-	public BoardDTO boardSelect() throws Exception {
-	
-		return null;
+	public long boardCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"boardCount");
+	}
+
+	@Override
+	public BoardDTO boardSelect(long num) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"boardSelect", num);
 	}
 
 	@Override
@@ -45,12 +49,11 @@ public class NoticeDAO implements BoardDAO {
 	@Override
 	public int boardUpdate(BoardDTO boardDTO) throws Exception {
 		return sqlSession.update(NAMESPACE+"boardUpdate", boardDTO);
-		
 	}
 
 	@Override
-	public int hitUpdate(BoardDTO boardDTO) throws Exception {
-		return sqlSession.update(NAMESPACE+"hitUpdate", boardDTO);
+	public int hitUpdate(long num) throws Exception {
+		return sqlSession.update(NAMESPACE+"hitUpdate", num);
 	}
 	
 	

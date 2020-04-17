@@ -1,7 +1,7 @@
 package com.sy.s5.board;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface BoardDAO {
 	//멤버변수 상수
@@ -9,10 +9,12 @@ public interface BoardDAO {
 	//접근제어자는 public abstract
 	//생략해도 자동으로 만들어짐
 	
+	//Count
+	public long boardCount() throws Exception;
 	//List
-	public List<BoardDTO> boardList() throws Exception;
+	public List<BoardDTO> boardList(Map<String, Integer> map) throws Exception;
 	//Select
-	public BoardDTO boardSelect() throws Exception;
+	public BoardDTO boardSelect(long num) throws Exception;
 	//Insert
 	public int boardWrite(BoardDTO boardDTO) throws Exception;
 	//Delete
@@ -20,7 +22,7 @@ public interface BoardDAO {
 	//Update
 	public int boardUpdate(BoardDTO boardDTO) throws Exception;
 	//hit update
-	public int hitUpdate(BoardDTO boardDTO) throws Exception;
+	public int hitUpdate(long num) throws Exception;
 	
 	
 	

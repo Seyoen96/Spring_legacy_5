@@ -8,7 +8,7 @@ public class BoardDTO {
 	private String title;
 	private String writer;
 	private String contents;
-	private Date redDate;
+	private Date regDate;
 	private long hit;
 	
 	
@@ -36,11 +36,11 @@ public class BoardDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getRedDate() {
-		return redDate;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setRedDate(Date redDate) {
-		this.redDate = redDate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	public long getHit() {
 		return hit;

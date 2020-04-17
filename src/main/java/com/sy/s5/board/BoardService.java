@@ -1,0 +1,25 @@
+package com.sy.s5.board;
+
+import java.util.List;
+
+public interface BoardService {
+	
+	//List
+	public List<BoardDTO> boardList(int curPage) throws Exception;
+	
+	//Select
+	//hitUpdate는 여기서 실행
+	public BoardDTO boardSelect(long num) throws Exception;
+	
+	//Insert
+	public int boardWrite(BoardDTO boardDTO) throws Exception;
+	
+	//Update
+	public int boardUpdate(BoardDTO boardDTO) throws Exception;
+	
+	//Delete
+	public int boardDelete(long num) throws Exception;
+	
+
+
+}
