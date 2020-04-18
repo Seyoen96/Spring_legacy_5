@@ -40,25 +40,25 @@ public class QnaDAO implements BoardDAO{
 	@Override
 	public int boardWrite(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"boardWrite",boardDTO);
 	}
 
 	@Override
 	public int boardDelete(long num) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"boardDelete", num);
 	}
 
 	@Override
 	public int boardUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"boardUpdate", boardDTO);
 	}
 
 	@Override
 	public int hitUpdate(long num) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"hitUpdate", num);
 	}
 	
 	

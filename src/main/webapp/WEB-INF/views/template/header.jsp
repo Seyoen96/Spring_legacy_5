@@ -11,7 +11,7 @@
 	      <li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
 	      
 	      <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
-	      <li><a href="${pageContext.request.contextPath}/notice/noticeList?id=${member.id}">QnA</a></li>
+	      <li><a href="${pageContext.request.contextPath}/qna/qnaList">QnA</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	    	<c:if test="${empty sessionScope.member}">

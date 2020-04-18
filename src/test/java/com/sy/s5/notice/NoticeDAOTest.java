@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sy.s5.AbstractTestCase;
 import com.sy.s5.board.BoardDTO;
+import com.sy.s5.qna.QnaDAO;
+import com.sy.s5.qna.QnaDTO;
 
 public class NoticeDAOTest extends AbstractTestCase{
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
+	private QnaDAO qnaDAO;
 	
 	
 	public void daoIsNull() {
@@ -29,24 +32,26 @@ public class NoticeDAOTest extends AbstractTestCase{
 		String contents="";
 		
 		for(int i=0; i<150;i++) {
-			NoticeDTO noticeDTO = new NoticeDTO();
+			QnaDTO qnaDTO = new QnaDTO();
 			if(i%3==0) {
-				writer="aa";
-				title="lalala";
-				contents="apple";
+				writer="qqqqqqq";
+				title="question";
+				contents="StarBucks";
 			} else if(i%3 == 1) {
-				writer="bb";
-				title="kiki";
-				contents="samsung";				
+				writer="zvdff";
+				title="heyyy";
+				contents="Twosome";				
 			} else if(i%3 == 2) {
-				writer ="cc";
-				title="roro";
-				contents="LG";
+				writer ="caddwc";
+				title="cake";
+				contents="Paris";
 			}
-			noticeDTO.setTitle(title+i);
-			noticeDTO.setWriter(writer);
-			noticeDTO.setContents(contents+i);
-			int res = noticeDAO.boardWrite(noticeDTO);		
+			
+			System.out.println("title"+title);
+			qnaDTO.setTitle(title+i);
+			qnaDTO.setWriter(writer);
+			qnaDTO.setContents(contents+i);
+			int res = qnaDAO.boardWrite(qnaDTO);		
 			if(i==50 || i==100) {
 				Thread.sleep(1000);
 			}

@@ -45,7 +45,8 @@
 	        	return false;
 	        }
 	        else{
-	        	$(location).attr('href','./memberDelete');
+	        	$(location).attr('href','./memberDelete?id='+'${member.id}');
+	        	
 	        	alert("탈퇴 완료되었습니다");
 	        }
 		});
