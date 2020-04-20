@@ -3,6 +3,8 @@ package com.sy.s5.board;
 import java.util.List;
 import java.util.Map;
 
+import com.sy.s5.board.pager.Pager;
+
 public interface BoardDAO {
 	//멤버변수 상수
 	//추상메서드
@@ -10,9 +12,9 @@ public interface BoardDAO {
 	//생략해도 자동으로 만들어짐
 	
 	//Count
-	public long boardCount() throws Exception;
+	public long boardCount(Pager pager) throws Exception;
 	//List
-	public List<BoardDTO> boardList(Map<String, Integer> map) throws Exception;
+	public List<BoardDTO> boardList(Pager pager) throws Exception;
 	//Select
 	public BoardDTO boardSelect(long num) throws Exception;
 	//Insert

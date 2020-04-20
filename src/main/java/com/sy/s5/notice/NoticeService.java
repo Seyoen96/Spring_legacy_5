@@ -1,6 +1,6 @@
 package com.sy.s5.notice;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sy.s5.board.BoardDTO;
 import com.sy.s5.board.BoardService;
+import com.sy.s5.board.pager.Pager;
 
 @Service
 public class NoticeService implements BoardService {
@@ -18,25 +19,11 @@ public class NoticeService implements BoardService {
 	
 
 	@Override
-	public List<BoardDTO> boardList(int curPage) throws Exception {
-		int startRow = (curPage-1)*10+1;
-		int lastRow = curPage*10;
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", startRow);
-		map.put("lastRow", lastRow);
-		
-		//--------------------------------------------------
-		//1. 총 글의 갯수
-		long totalCount = noticeDAO.boardCount();
-		System.out.println("Total Count : "+totalCount);
-		
-		//2. 총 페이지 갯수
-		long totalPage = totalCount/10;
-		if(totalCount%10!=0) {
-			totalPage++;
-		}
-		
-		return noticeDAO.boardList(map);
+	public List<BoardDTO> boardList(Pager pager) throws Exception {	
+		pager.makeRow();
+		long totalCount = noticeDAO.boardCount(pager);
+		pager.makePage(totalCount);		
+		return noticeDAO.boardList(pager);
 	}
 
 	@Override

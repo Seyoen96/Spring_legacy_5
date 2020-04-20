@@ -6,14 +6,43 @@
   <mapper namespace="com.sy.s5.notice.NoticeDAO">
   	<!-- Notice -->
 	<!-- 전체 글의 갯수 -->  
-  	<select id="boardCount" resultType="java.lang.Long">
-  		select count(num) from notice  	
+	<sql id="search">
+		 like '%'||#{search}||'%'  	
+	</sql>
+	
+  	<select id="boardCount" parameterType="com.sy.s5.board.pager.Pager" resultType="java.lang.Long">
+  		select count(num) from notice
+  		<where>
+  			<if test="kind == 'bt'">
+  				title <include refid="search"></include>
+  			</if>
+  			<if test="kind=='bw'">
+  				writer <include refid="search"></include>
+  			</if>
+  			<if test="kind=='bc'">
+  				contents <include refid="search"></include> 	
+  			</if>
+  		</where> 	
   	</select>
   
-  	<select id="boardList" parameterType="java.util.Map" resultType="com.sy.s5.notice.NoticeDTO">
+  
+  
+  	<select id="boardList" parameterType="com.sy.s5.board.pager.Pager" resultType="com.sy.s5.notice.NoticeDTO">
   		select * from
 			(select N.*, rownum R from
-				(select * from notice where num>=1 order by num desc) N)
+				(select * from notice where 
+				<choose>
+					<when test="kind == 'bw'">
+						writer
+					</when>
+					<when test="kind =='bt'">
+						title
+					</when>
+					<otherwise>
+						contents
+					</otherwise>
+				</choose>
+				 <include refid="search"></include> and num>=1 order by num desc) N)
 		where R between #{startRow} and #{lastRow}
   	</select>
   

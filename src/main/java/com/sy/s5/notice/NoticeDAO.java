@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sy.s5.board.BoardDAO;
 import com.sy.s5.board.BoardDTO;
+import com.sy.s5.board.pager.Pager;
 
 
 @Repository
@@ -21,13 +22,13 @@ public class NoticeDAO implements BoardDAO {
 	
 	//noticeList
 	@Override
-	public List<BoardDTO> boardList(Map<String, Integer> map) throws Exception {
-		return sqlSession.selectList(NAMESPACE+"boardList",map);
+	public List<BoardDTO> boardList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"boardList",pager);
 	}
 	
 	@Override
-	public long boardCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"boardCount");
+	public long boardCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"boardCount",pager);
 	}
 
 	@Override

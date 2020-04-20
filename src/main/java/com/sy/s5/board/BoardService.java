@@ -2,10 +2,12 @@ package com.sy.s5.board;
 
 import java.util.List;
 
+import com.sy.s5.board.pager.Pager;
+
 public interface BoardService {
 	
 	//List
-	public List<BoardDTO> boardList(int curPage) throws Exception;
+	public List<BoardDTO> boardList(Pager pager) throws Exception;
 	
 	//Select
 	//hitUpdate는 여기서 실행

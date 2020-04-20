@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sy.s5.board.BoardDTO;
 import com.sy.s5.board.BoardService;
+import com.sy.s5.board.pager.Pager;
 
 
 @Service
@@ -20,20 +21,15 @@ public class QnaService implements BoardService {
 	
 	//총 글의 갯수 
 	@Override
-	public List<BoardDTO> boardList(int curPage) throws Exception {
-		int startRow = (curPage-1)*10-1;
-		int lastRow = curPage*10;
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", startRow);
-		map.put("lastRow", lastRow);
-		
-		long totalCount = qnaDAO.boardCount();
+	public List<BoardDTO> boardList(Pager pager) throws Exception {
+	
+		long totalCount = qnaDAO.boardCount(pager);
 		long totalPage = totalCount/10;
 		
 		if(totalCount%10 != 0) {
 			totalPage++;
 		}
-		return qnaDAO.boardList(map);
+		return qnaDAO.boardList(pager);
 	}
 
 	//글 상세 페이지
