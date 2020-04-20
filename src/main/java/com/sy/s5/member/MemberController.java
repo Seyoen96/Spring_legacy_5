@@ -1,5 +1,7 @@
 package com.sy.s5.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sy.s5.member.memberPager.MemberPager;
 
 @Controller
 @RequestMapping("/member/**")
@@ -34,6 +38,17 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "memberList")
+	public ModelAndView memberList(MemberPager memberPager, ModelAndView mv) throws Exception{
+		List<MemberDTO> ar = memberService.memberList(memberPager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", memberPager);
+		mv.setViewName("member/memberList");
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "memberPage")
 	public void memberPage(MemberDTO memberDTO) throws Exception {

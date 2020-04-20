@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sy.s5.AbstractTestCase;
 import com.sy.s5.board.BoardDTO;
+import com.sy.s5.member.MemberDAO;
+import com.sy.s5.member.MemberDTO;
 import com.sy.s5.qna.QnaDAO;
 import com.sy.s5.qna.QnaDTO;
 
@@ -16,7 +18,10 @@ public class NoticeDAOTest extends AbstractTestCase{
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
+	@Autowired
 	private QnaDAO qnaDAO;
+	@Autowired
+	private MemberDAO memberDAO;
 	
 	
 	public void daoIsNull() {
@@ -27,31 +32,47 @@ public class NoticeDAOTest extends AbstractTestCase{
 	
 	@Test
 	public void boardWriteTest() throws Exception {
-		String writer="";
-		String title="";
-		String contents="";
+		String id="";
+		String pwd="";
+		String name="";
+		String email="";
+		String phone="";
+		long age =0;
 		
-		for(int i=0; i<150;i++) {
-			QnaDTO qnaDTO = new QnaDTO();
+		for(int i=69; i<100;i++) {
+			MemberDTO memberDTO = new MemberDTO();
 			if(i%3==0) {
-				writer="qqqqqqq";
-				title="question";
-				contents="StarBucks";
+				id="jaaa";
+				pwd="111";
+				name="ja";
+				email="jja@gmail.com";
+				phone="010-1111-1234";
+				age=20L;
 			} else if(i%3 == 1) {
-				writer="zvdff";
-				title="heyyy";
-				contents="Twosome";				
+				id="kkoo";
+				pwd="222";
+				name="ko";
+				email="jkkkkk@gmail.com";
+				phone="010-0000-1234";		
+				age=28L;
 			} else if(i%3 == 2) {
-				writer ="caddwc";
-				title="cake";
-				contents="Paris";
+				id="ssii";
+				pwd="333";
+				name="sisi";
+				email="ssssiiii@gmail.com";
+				phone="010-4444-8787";
+				age=30L;
 			}
 			
-			System.out.println("title"+title);
-			qnaDTO.setTitle(title+i);
-			qnaDTO.setWriter(writer);
-			qnaDTO.setContents(contents+i);
-			int res = qnaDAO.boardWrite(qnaDTO);		
+			memberDTO.setId(id+i);
+			memberDTO.setPwd(pwd+i);
+			memberDTO.setName(name);
+			memberDTO.setEmail(email);
+			memberDTO.setPhone(phone);
+			memberDTO.setAge(age);
+			
+			
+			int res = memberDAO.memberJoin(memberDTO);	
 			if(i==50 || i==100) {
 				Thread.sleep(1000);
 			}

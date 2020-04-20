@@ -19,8 +19,7 @@
 	      <li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
 	      
 	      <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
-	      <li><a href="${pageContext.request.contextPath}/qna/qnaList">QnA</a></li>
-	      <li><a href="${pageContext.request.contextPath}/member/memberList">Member List</a></li>
+	      <li><a href="${pageContext.request.contextPath}/notice/noticeList?id=${member.id}">QnA</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	    	<c:if test="${empty sessionScope.member}">
@@ -38,13 +37,14 @@
 	
 <div class="container">
 	<div class="row">
-	<h1>${board} List Page</h1>
-		 <form action="./${board}List" class= "col-xs-6">
+	<h1>Member List Page</h1>
+		 <form action="./memberList" class= "col-xs-6">
 		    <div class="input-group">
 		    	<select class="form-control" id="sel1" name ="kind">
-				    <option value="bt">Title</option>
-				    <option value="bc">Contents</option>
-				    <option value="bw">Writer</option>
+				    <option value="ii">ID</option>
+				    <option value="nn">Name</option>
+				    <option value="pp">Phone</option>
+				    <option value="ee">Email</option>
 				  </select>
 		    
 		      <input type="text" class="form-control" placeholder="Search" name="search">
@@ -58,43 +58,38 @@
 		<table class="table table-hover">
 		<thead>
 			<tr>
-				<td>Num</td>
-				<td>Title</td>
-				<td>Writer</td>
-				<td>Date</td>
-				<td>Hit</td>
+				<td>ID</td>
+				<td>Name</td>
+				<td>Phone</td>
+				<td>Email</td>
+				<td>Age</td>
 			</tr>
 		</thead>
 			<c:forEach items="${list}" var="dto">
 				<tr>
-					<td>${dto.num}</td>
-					<td><a href="./${board}Select?num=${dto.num}">${dto.title}</a></td>
-					<td>${dto.writer}</td>
-					<td>${dto.regDate}</td>
-					<td>${dto.hit}</td>
+					<td><a href="./memberPage?id=${dto.id}">${dto.id}</a></td>
+					<td>${dto.name}</td>
+					<td>${dto.phone}</td>
+					<td>${dto.email}</td>
+					<td>${dto.age}</td>
 				</tr>
 			</c:forEach>			
 		</table>
 		
-		
 		<div>
 			<ul class="pagination">
-			<c:if test="${pager.curBlock gt 1}">
-			<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+			<c:if test="${pager.curBlock > 1}">
+				<li><a href="./memberList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+				<li><a href="./memberList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 			</c:forEach>
 			<c:if test="${pager.curBlock lt pager.totalBlock}">
-			<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+			<li><a href="./memberList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
 			</c:if>
 			</ul>
 		</div>
 		
-		
-		<div>
-			<a href="./${board}Write" class="btn btn-danger">Write</a>
-		</div>
 		
 	
 	</div>

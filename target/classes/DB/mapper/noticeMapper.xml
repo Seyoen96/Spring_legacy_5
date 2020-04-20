@@ -42,7 +42,7 @@
 						contents
 					</otherwise>
 				</choose>
-				 <include refid="search"></include> and num>=1 order by num desc) N)
+				<include refid="search"></include> and num>=1 order by num desc) N)
 		where R between #{startRow} and #{lastRow}
   	</select>
   

@@ -4,6 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   <mapper namespace="com.sy.s5.member.MemberDAO">
+  
+  		<sql id="search">
+  			like '%'||#{search}||'%'
+  		</sql>
+  		
+  	  <select id="memberList" parameterType="com.sy.s5.member.memberPager.MemberPager" resultType="com.sy.s5.member.MemberDTO">
+  		select * from
+			(select M.*, ROWNUM R from
+				(select * from member where
+				<choose>
+					<when test="kind=='ii'">
+						id
+					</when>
+					<when test="kind=='nn'">
+						name
+					</when>
+					<when test="kind=='pp'">
+						phone
+					</when>
+					<otherwise>
+						email
+					</otherwise>
+				</choose>		
+				<include refid="search"></include>
+				 order by rownum desc) M) 
+		where R BETWEEN #{startRow} and #{lastRow}
+  		  
+  	  </select>
+  		
+  		
+  		<select id="memberCount" parameterType="com.sy.s5.member.memberPager.MemberPager" resultType="java.lang.Long">
+  			select count(id) from member
+  			<where>
+  				<if test="kind =='ii'">
+  					id <include refid="search"></include>
+  				</if>
+  				<if test="kind == 'nn'">
+  					name <include refid="search"></include>
+  				</if>
+  				<if test="kind=='pp'">
+  					phone <include refid="search"></include>
+  				</if>
+  				<if test="kind=='ee'">
+  					email  <include refid="search"></include>
+  				</if>
+  			</where>
+  		</select>
+  		
+  
 	  <select id="memberLogin" parameterType="com.sy.s5.member.MemberDTO" resultType="com.sy.s5.member.MemberDTO">
 	  	select * from member where id=#{id} and pwd=#{pwd}
 	  </select>

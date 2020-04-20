@@ -11,29 +11,30 @@
 <body>
 
 	<nav class="navbar navbar-inverse">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">WebSiteName</a>
-		    </div>
-		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
-		      
-		      <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
-		      <li><a href="${pageContext.request.contextPath}/notice/noticeList?id=${member.id}">QnA</a></li>
-		    </ul>
-		    <ul class="nav navbar-nav navbar-right">
-		    	<c:if test="${empty sessionScope.member}">
-			      <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			      <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		     	</c:if>	
-		     	
-		      	<c:if test="${not empty member}">
-			      <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
-			      <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-		    	</c:if>
-		    </ul>
-		  </div>
-		</nav>
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">WebSiteName</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
+	      
+	      <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
+	      <li><a href="${pageContext.request.contextPath}/qna/qnaList">QnA</a></li>
+	      <li><a href="${pageContext.request.contextPath}/member/memberList">Member List</a></li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	    	<c:if test="${empty sessionScope.member}">
+		      <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		      <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	     	</c:if>	
+	     	
+	      	<c:if test="${not empty member}">
+		      <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
+		      <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+	    	</c:if>
+	    </ul>
+	  </div>
+	</nav>
 		
 	<div class="container">
 		<div class="row">
