@@ -14,9 +14,10 @@
 
 	<div class="container">
 		<div class="row">
-		<h1>${board} Write Page</h1>
+		<h1>${board} Reply Page</h1>
 		
-		<form action="../${board}/${board}Write" method="POST">
+		<form action="../${board}/${board}Reply" method="POST">
+		<input type="hidden" name="num" value="${num}">
 		
 		<div class="form-group">
 		  <label for="title">Title:</label>

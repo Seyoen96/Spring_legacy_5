@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sy.s5.board.BoardDTO;
-import com.sy.s5.board.pager.Pager;
+import com.sy.s5.util.Pager;
 
 @Controller
 @RequestMapping("/notice/**")

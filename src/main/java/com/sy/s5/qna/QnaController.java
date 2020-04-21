@@ -5,14 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sy.s5.board.BoardDTO;
-import com.sy.s5.board.pager.Pager;
+import com.sy.s5.util.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -28,29 +30,52 @@ public class QnaController {
 	}
 	
 	
-	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
+	@GetMapping("qnaList")
 	public ModelAndView boardList(Pager pager, ModelAndView mv) throws Exception{
 		List<BoardDTO> ar = qnaService.boardList(pager);
 		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
 	
-	@RequestMapping(value = "qnaSelect", method = RequestMethod.GET)
-	public ModelAndView boardSelect(long num) throws Exception{
+	@GetMapping("qnaSelect")
+	public ModelAndView boardSelect(long num,ModelAndView mv) throws Exception{
 		BoardDTO boardDTO = qnaService.boardSelect(num);
-		ModelAndView mv = new ModelAndView();
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/boardSelect");
 		return mv;
 	}
 	
-	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
+	
+	@GetMapping("qnaReply")
+	public ModelAndView boardReply(ModelAndView mv, long num) throws Exception{
+		mv.addObject("num", num);		//부모의 글번호
+		mv.setViewName("board/boardReply");
+		return mv;
+	}
+	
+	@PostMapping("qnaReply")
+	public ModelAndView boardReply(ModelAndView mv, QnaDTO qnaDTO) throws Exception{
+		int result = qnaService.boardReply(qnaDTO);
+		if(result>0) {
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("result", "답글 작성 실패");
+			mv.addObject("path", "./qnaList");
+			mv.setViewName("common/result");
+		}
+		return mv;
+	}
+	
+	
+	
+	@GetMapping("qnaWrite")
 	public String boardWrite() throws Exception {
 		return "board/boardWrite";
 	}
 	
-	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
+	@PostMapping("qnaWrite")
 	public ModelAndView boardWrite(BoardDTO boardDTO, ModelAndView mv) throws Exception{
 		int res = qnaService.boardWrite(boardDTO);		
 		if(res>0) {
@@ -64,7 +89,8 @@ public class QnaController {
 	}
 	
 	
-	@RequestMapping(value = "qnaUpdate", method = RequestMethod.GET)
+	
+	@GetMapping("qnaUpdate")
 	public ModelAndView boardUpdate(long num, ModelAndView mv) throws Exception{
 		BoardDTO boardDTO = qnaService.boardSelect(num);
 		mv.addObject("dto", boardDTO);
@@ -72,7 +98,7 @@ public class QnaController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
+	@PostMapping("qnaUpdate")
 	public String boardUpdate(BoardDTO boardDTO) throws Exception{
 		int res = qnaService.boardUpdate(boardDTO);
 		String path="";
@@ -84,7 +110,7 @@ public class QnaController {
 		return path;
 	}
 	
-	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
+	@GetMapping("qnaDelete")
 	public ModelAndView boardDelete(long num, ModelAndView mv) throws Exception{
 		int res = qnaService.boardDelete(num);
 		if(res>0) {
@@ -92,7 +118,7 @@ public class QnaController {
 			mv.addObject("path", "./qnaList");
 		} else {
 			mv.addObject("result", "delete fail!");
-			mv.addObject("path", "./qnaSelect");
+			mv.addObject("path", "./qnaSelect?num="+num);
 		}
 		mv.setViewName("common/result");
 		return mv;

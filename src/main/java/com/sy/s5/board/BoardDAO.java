@@ -3,7 +3,7 @@ package com.sy.s5.board;
 import java.util.List;
 import java.util.Map;
 
-import com.sy.s5.board.pager.Pager;
+import com.sy.s5.util.Pager;
 
 public interface BoardDAO {
 	//멤버변수 상수

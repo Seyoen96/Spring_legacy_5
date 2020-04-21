@@ -13,7 +13,7 @@
 	
 	<div class="container">
 	  <h2>Member Join Form</h2>
-	  <form class="form-horizontal" action="../member/memberJoin" method="POST">
+	  <form class="form-horizontal" action="../member/memberJoin" method="POST" enctype="multipart/form-data">
 	  
 	    <div class="form-group">
 	      <label class="control-label col-sm-2" for=id>ID:</label>
@@ -51,6 +51,13 @@
 	      <label class="control-label col-sm-2" for=age>Age:</label>
 	      <div class="col-sm-10">
 	        <input type="text" class="form-control" id="age" placeholder="Enter age" name="age">
+	      </div>
+	    </div>
+	    
+	     <div class="form-group">
+	      <label class="control-label col-sm-2" for=pic>Photo:</label>
+	      <div class="col-sm-10">
+	        <input type="file" class="form-control" id="pic" placeholder="Enter age" name="pic">
 	      </div>
 	    </div>
 	    

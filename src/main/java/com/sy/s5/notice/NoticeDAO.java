@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sy.s5.board.BoardDAO;
 import com.sy.s5.board.BoardDTO;
-import com.sy.s5.board.pager.Pager;
+import com.sy.s5.util.Pager;
 
 
 @Repository

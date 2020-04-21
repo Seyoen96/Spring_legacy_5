@@ -9,7 +9,7 @@
   			like '%'||#{search}||'%'
   		</sql>
   		
-  	  <select id="memberList" parameterType="com.sy.s5.member.memberPager.MemberPager" resultType="com.sy.s5.member.MemberDTO">
+  	  <select id="memberList" parameterType="Pager" resultType="MemberDTO">
   		select * from
 			(select M.*, ROWNUM R from
 				(select * from member where
@@ -34,7 +34,7 @@
   	  </select>
   		
   		
-  		<select id="memberCount" parameterType="com.sy.s5.member.memberPager.MemberPager" resultType="java.lang.Long">
+  		<select id="memberCount" parameterType="Pager" resultType="Long">
   			select count(id) from member
   			<where>
   				<if test="kind =='ii'">
@@ -53,19 +53,19 @@
   		</select>
   		
   
-	  <select id="memberLogin" parameterType="com.sy.s5.member.MemberDTO" resultType="com.sy.s5.member.MemberDTO">
+	  <select id="memberLogin" parameterType="MemberDTO" resultType="MemberDTO">
 	  	select * from member where id=#{id} and pwd=#{pwd}
 	  </select>
 	  
-	  <insert id="memberJoin" parameterType="com.sy.s5.member.MemberDTO">
+	  <insert id="memberJoin" parameterType="MemberDTO">
 	  	insert into member values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{age})
 	  </insert>
   	
-	  <update id="memberUpdate" parameterType="com.sy.s5.member.MemberDTO">
+	  <update id="memberUpdate" parameterType="MemberDTO">
 	  	 update member set name=#{name}, email=#{email}, phone=#{phone}, age=#{age} where id=#{id}
 	  </update>
 	  
-	  <delete id="memberDelete" parameterType="java.lang.String">
+	  <delete id="memberDelete" parameterType="String">
 	  	delete member where id=#{id}
 	  </delete>
 	  

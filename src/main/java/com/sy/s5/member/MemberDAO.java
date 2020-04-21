@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sy.s5.member.memberPager.MemberPager;
+import com.sy.s5.util.Pager;
 
 @Repository
 public class MemberDAO {
@@ -31,11 +31,11 @@ public class MemberDAO {
 		return sqlSession.delete(NAMESPACE+"memberDelete", id);	
 	}
 	
-	public List<MemberDTO> memberList(MemberPager memberPager) throws Exception{
+	public List<MemberDTO> memberList(Pager memberPager) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"memberList", memberPager);
 	}
 	
-	public long memberCount(MemberPager memberPager) throws Exception{
+	public long memberCount(Pager memberPager) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"memberCount", memberPager);
 	}
 	

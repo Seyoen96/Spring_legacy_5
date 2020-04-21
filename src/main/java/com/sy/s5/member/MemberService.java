@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sy.s5.member.memberPager.MemberPager;
+
+import com.sy.s5.util.Pager;
 
 @Service
 public class MemberService {
@@ -29,7 +30,7 @@ public class MemberService {
 		return memberDAO.memberDelete(id);
 	}
 	
-	public List<MemberDTO> memberList(MemberPager memberPager) throws Exception{
+	public List<MemberDTO> memberList(Pager memberPager) throws Exception{
 		memberPager.makeRow();
 		long totalCount = memberDAO.memberCount(memberPager);
 		memberPager.makePage(totalCount);

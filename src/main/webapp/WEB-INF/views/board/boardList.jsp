@@ -68,7 +68,15 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td>${dto.num}</td>
-					<td><a href="./${board}Select?num=${dto.num}">${dto.title}</a></td>
+					<td>
+					
+					<c:catch>
+					<c:forEach begin="1" end="${dto.depth}">
+						&nbsp;&nbsp;→
+					</c:forEach>
+					</c:catch>
+					
+					<a href="./${board}Select?num=${dto.num}">${dto.title}</a></td>
 					<td>${dto.writer}</td>
 					<td>${dto.regDate}</td>
 					<td>${dto.hit}</td>
@@ -92,9 +100,24 @@
 		</div>
 		
 		
-		<div>
-			<a href="./${board}Write" class="btn btn-danger">Write</a>
-		</div>
+		<c:catch>
+		<c:if test="${not empty member}">
+			<c:if test="${board eq 'qna'}">
+				<div>
+					<a href="./${board}Write" class="btn btn-danger">Write</a>
+				</div>
+			</c:if>
+			
+			<c:if test="${board eq 'notice'}">
+				<c:if test="${member.id eq 'admin'}">
+					<div>
+					<a href="./${board}Write" class="btn btn-danger">Write</a>
+					</div>
+				</c:if>
+			</c:if>	
+		</c:if>
+		</c:catch>
+		
 		
 	
 	</div>

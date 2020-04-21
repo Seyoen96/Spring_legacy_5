@@ -20,6 +20,7 @@
 	      
 	      <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
 	      <li><a href="${pageContext.request.contextPath}/notice/noticeList?id=${member.id}">QnA</a></li>
+	      <li><a href="${pageContext.request.contextPath}/member/memberList">MemberList</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	    	<c:if test="${empty sessionScope.member}">
