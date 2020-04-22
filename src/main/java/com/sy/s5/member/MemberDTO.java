@@ -1,5 +1,7 @@
 package com.sy.s5.member;
 
+import com.sy.s5.member.memberFile.MemberFileDTO;
+
 public class MemberDTO {
 	private String id;
 	private String pwd;
@@ -7,6 +9,15 @@ public class MemberDTO {
 	private String email;
 	private String phone;
 	private long age;
+	private MemberFileDTO memberFileDTO;
+	
+	
+	public MemberFileDTO getMemberFileDTO() {
+		return memberFileDTO;
+	}
+	public void setMemberFileDTO(MemberFileDTO memberFileDTO) {
+		this.memberFileDTO = memberFileDTO;
+	}
 	
 	public String getId() {
 		return id;

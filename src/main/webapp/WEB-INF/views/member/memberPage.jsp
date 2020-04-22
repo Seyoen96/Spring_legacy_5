@@ -42,7 +42,7 @@
 		
 		
 		<h1>My Page</h1>
-			<img alt="" src="../resources/memberUpload/${file.fileName}">
+			<img alt="" src="../resources/memberUpload/${member.memberFileDTO.fileName}">
 			<div>
 				<h3><a href="./fileDelete">File Delete</a></h3>
 			</div>

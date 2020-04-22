@@ -58,7 +58,7 @@
 	    <div class="form-group">
 	      <label class="control-label col-sm-2" for=pic>Photo:</label>
 	      <div class="col-sm-10">
-	        <input type="image" class="form-control" id="pic" value="${}" name="pic">
+	        <input type="file" class="form-control" id="pic" value="" name="pic">
 	      </div>
 	    </div>
 	    

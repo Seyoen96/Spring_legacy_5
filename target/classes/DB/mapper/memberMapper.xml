@@ -5,9 +5,40 @@
 
   <mapper namespace="com.sy.s5.member.MemberDAO">
   
+  		<resultMap type="MemberDTO" id="loginResult">
+  			<id column="id" property="id"/>	<!-- primary key로 꺼내오는 값인 경우 -->
+  			<result column="pwd" property="pwd"/>
+  			<result column="name" property="name"/>
+  			<result column="email" property="email"/>
+  			<result column="phone" property="phone"/>
+  			<result column="age" property="age"/>
+  			
+  			<!-- 객체가 1개 인 경우   1:1 -->
+  			<association property="memberFileDTO" javaType="MemberFileDTO">
+  				<result column="fileName" property="fileName"/>
+  				<result column="oriName" property="oriName"/>
+  			</association>
+  		</resultMap>
+  		
+  		
   		<sql id="search">
   			like '%'||#{search}||'%'
   		</sql>
+  		
+  		
+  	
+  	
+  	 <select id="memberLogin" parameterType="MemberDTO" resultMap="loginResult">
+	  		select M.*, F.fileName, F.oriName
+			from member M left join memberFile F
+			on (M.id=F.id)
+			where M.id =#{id} and M.pwd=#{pwd}
+	  </select>
+	  
+	  <insert id="memberJoin" parameterType="MemberDTO">
+	  	insert into member values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{age})
+	  </insert>
+  	
   		
   	  <select id="memberList" parameterType="Pager" resultType="MemberDTO">
   		select * from
@@ -53,14 +84,7 @@
   		</select>
   		
   
-	  <select id="memberLogin" parameterType="MemberDTO" resultType="MemberDTO">
-	  	select * from member where id=#{id} and pwd=#{pwd}
-	  </select>
-	  
-	  <insert id="memberJoin" parameterType="MemberDTO">
-	  	insert into member values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{age})
-	  </insert>
-  	
+	 
 	  <update id="memberUpdate" parameterType="MemberDTO">
 	  	 update member set name=#{name}, email=#{email}, phone=#{phone}, age=#{age} where id=#{id}
 	  </update>

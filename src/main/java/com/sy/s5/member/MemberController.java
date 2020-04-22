@@ -70,9 +70,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberPage")
 	public void memberPage(HttpSession session, Model model) throws Exception {
-		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		MemberFileDTO memberFileDTO = memberService.fileSelect(memberDTO.getId());
-		model.addAttribute("file", memberFileDTO);
+	
 	}
 	
 	

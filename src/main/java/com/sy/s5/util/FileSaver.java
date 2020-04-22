@@ -36,14 +36,14 @@ public class FileSaver {
 	
 	
 	//파일명 생성 
-	private String makeNameByUUID(String name) {
+	private String makeNameByUUID(String name) throws Exception {
 		String result = UUID.randomUUID().toString(); 
 		String type =name.substring(name.lastIndexOf("."));
 		result = result+type;
 		System.out.println(result);
 		return result;
 	}	
-	private Long makeNameByTime(String name) {
+	private Long makeNameByTime(String name) throws Exception{
 		//Calendar는 추상 클래스 이므로 
 		Calendar cal = Calendar.getInstance();
 		long l = cal.getTimeInMillis();
