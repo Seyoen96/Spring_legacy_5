@@ -55,7 +55,12 @@
 	        <input type="text" class="form-control" id="age" value="${member.age}" placeholder="Enter age" name="age">
 	      </div>
 	    </div>
-	    
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for=pic>Photo:</label>
+	      <div class="col-sm-10">
+	        <input type="image" class="form-control" id="pic" value="${}" name="pic">
+	      </div>
+	    </div>
 	    
 	    
 	    <div class="form-group">        

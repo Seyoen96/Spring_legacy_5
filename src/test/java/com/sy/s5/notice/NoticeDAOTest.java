@@ -2,7 +2,7 @@ package com.sy.s5.notice;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +11,12 @@ import com.sy.s5.AbstractTestCase;
 import com.sy.s5.board.BoardDTO;
 import com.sy.s5.member.MemberDAO;
 import com.sy.s5.member.MemberDTO;
-import com.sy.s5.qna.QnaDAO;
-import com.sy.s5.qna.QnaDTO;
+
 
 public class NoticeDAOTest extends AbstractTestCase{
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
-	@Autowired
-	private QnaDAO qnaDAO;
 	@Autowired
 	private MemberDAO memberDAO;
 	
@@ -72,7 +69,7 @@ public class NoticeDAOTest extends AbstractTestCase{
 			memberDTO.setAge(age);
 			
 			
-			int res = memberDAO.memberJoin(memberDTO);	
+			memberDAO.memberJoin(memberDTO);	
 			if(i==50 || i==100) {
 				Thread.sleep(1000);
 			}

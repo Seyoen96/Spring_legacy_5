@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sy.s5.member.memberFile.MemberFileDTO;
 import com.sy.s5.util.Pager;
 
 @Controller
@@ -36,7 +38,7 @@ public class MemberController {
 		
 		Cookie cookie = new Cookie("cId", "");
 		if(remember!=null) {
-			// id를 기억하고싶을 때
+			// 이전에 입력했던 id를 기억
 //			cookie = new Cookie("cId", memberDTO.getId());
 			cookie.setValue(memberDTO.getId());
 		} 
@@ -67,8 +69,18 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "memberPage")
-	public void memberPage(MemberDTO memberDTO) throws Exception {
-		
+	public void memberPage(HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		MemberFileDTO memberFileDTO = memberService.fileSelect(memberDTO.getId());
+		model.addAttribute("file", memberFileDTO);
+	}
+	
+	
+	@GetMapping("fileDelete")
+	public String fileDelete(HttpSession session) throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		memberService.fileDelete(memberDTO.getId(),session);
+		return "redirect:./memberPage";
 	}
 	
 	
@@ -78,9 +90,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberJoin", method=RequestMethod.POST)
-	public ModelAndView memberJoin(String pic,MemberDTO memberDTO, ModelAndView mv) throws Exception{
-		System.out.println("pic: "+pic);
-		int res = memberService.memberJoin(memberDTO);
+	public ModelAndView memberJoin(MultipartFile pic,MemberDTO memberDTO, ModelAndView mv,HttpSession session) throws Exception{
+		
+		System.out.println("파일 업로드시 실제 이름 : "+pic.getOriginalFilename());
+		System.out.println("파라미터 이름 : "+pic.getName());
+		System.out.println("파일 사이즈  :"+pic.getSize());
+		System.out.println("파일 형식: "+pic.getContentType());
+		
+		pic.getBytes();					//파일의 바이트 배열
+		
+		int res = memberService.memberJoin(memberDTO,pic,session);
 		if(res>0) {
 			mv.addObject("result", "회원가입 완료");
 			mv.addObject("path", "../");		
