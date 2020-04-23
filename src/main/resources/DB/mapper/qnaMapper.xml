@@ -52,6 +52,7 @@
 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
 			select board_seq.nextval from dual
 		</selectKey>
+		
 		insert into qna values(
 		#{num},
 		#{title},

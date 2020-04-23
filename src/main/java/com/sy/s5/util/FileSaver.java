@@ -18,6 +18,7 @@ public class FileSaver {
 	
 	//1. FileCopyUtils 클래스 사용
 	public String saveByUtils(MultipartFile file, String path) throws Exception{
+		
 		File f = new File(path);
 		if(!f.exists()) {
 			//	resources/memberUpload
@@ -26,6 +27,7 @@ public class FileSaver {
 		}	
 		//a. 저장할 파일명 생성
 		String fileName = this.makeNameByUUID(file.getOriginalFilename());
+		System.out.println(fileName);
 		f = new File(f,fileName);
 		//b. HDD에 저장
 		FileCopyUtils.copy(file.getBytes(),f);
@@ -37,6 +39,7 @@ public class FileSaver {
 	
 	//파일명 생성 
 	private String makeNameByUUID(String name) throws Exception {
+		
 		String result = UUID.randomUUID().toString(); 
 		String type =name.substring(name.lastIndexOf("."));
 		result = result+type;

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -30,7 +31,7 @@
 			
 		<div class="form-group">
 		  <label for="contents">Contents:</label>
-		  <textarea class="form-control" rows="5" name="contents">${dto.contents}</textarea>
+		  <textarea class="form-control" rows="5" id="contents" name="contents">${dto.contents}</textarea>
 		</div>
 		
 		<button type="submit" class="btn btn-default">Update</button>
@@ -40,6 +41,13 @@
 	</div>
 </div>
 
+	<script type="text/javascript">
+		  $("#contents").summernote({
+			height:400	  
+		  });
+	</script>
+	
+	
 
 </body>
 </html>

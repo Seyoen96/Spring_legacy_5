@@ -46,7 +46,7 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int boardWrite(BoardDTO boardDTO,MultipartFile[] files) throws Exception {
-		String path = servletContext.getRealPath("/resources/uploadNotice"); 
+		String path = servletContext.getRealPath("/resources/uploadnotice"); 
 		System.out.println(path);
 		//sequence 번호 받기
 		boardDTO.setNum(noticeDAO.boardNum());		
@@ -55,13 +55,15 @@ public class NoticeService implements BoardService {
 		
 		for(MultipartFile file:files) {
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
-			String fileName = fileSaver.saveByUtils(file,path);			
+			String fileName = fileSaver.saveByTransfer(file,path);			
 			boardFileDTO.setNum(boardDTO.getNum());
 			boardFileDTO.setBoard("1");
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setOriName(file.getOriginalFilename());
 			boardFileDAO.fileInsert(boardFileDTO);		
 		}
+		
+		
 		return res;
 	}
 

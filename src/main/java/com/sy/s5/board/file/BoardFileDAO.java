@@ -11,8 +11,14 @@ public class BoardFileDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.sy.s5.board.file.BoardFileDAO.";
 	
-	public int fileInsert(BoardFileDTO boardFileDTO) {
+	public int fileInsert(BoardFileDTO boardFileDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"fileInsert",boardFileDTO);
 	}
 
+	public BoardFileDTO fileSelect(BoardFileDTO boardFileDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"fileSelect", boardFileDTO);
+	}
+	
+	
+	
 }

@@ -52,7 +52,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(MultipartFile[] files, NoticeDTO noticeDTO, ModelAndView mv) throws Exception{
+	public ModelAndView boardWrite(MultipartFile[] files, BoardDTO noticeDTO, ModelAndView mv) throws Exception{
 		int res = noticeService.boardWrite(noticeDTO, files);
 		if(res>0) {
 			//성공

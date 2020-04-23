@@ -22,7 +22,7 @@ public class BoardFileDAOTest {
 		boardFileDTO.setNum(2);
 		
 		System.out.println(boardFileDTO.getFileName());
-		boardFileDAO.fileInsert(boardFileDTO);
+		
 		
 		
 		

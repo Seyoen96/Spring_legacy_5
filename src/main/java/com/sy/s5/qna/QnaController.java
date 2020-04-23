@@ -74,8 +74,8 @@ public class QnaController {
 	}
 	
 	@PostMapping("qnaWrite")
-	public ModelAndView boardWrite(BoardDTO boardDTO, ModelAndView mv,MultipartFile[] files) throws Exception{
-		int res = qnaService.boardWrite(boardDTO,files);		
+	public ModelAndView boardWrite(QnaDTO qnaDTO, ModelAndView mv,MultipartFile[] files) throws Exception{
+		int res = qnaService.boardWrite(qnaDTO,files);		
 		if(res>0) {
 			mv.setViewName("redirect:./qnaList");
 		} else {

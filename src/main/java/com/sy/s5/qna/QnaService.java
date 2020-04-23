@@ -54,22 +54,24 @@ public class QnaService implements BoardService {
 
 	//글 작성
 	@Override
-	public int boardWrite(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
-		//글 작성동시에 시퀀스 번호도 sql문에서 받아옴 (qna table에)
+	public int boardWrite(BoardDTO boardDTO, MultipartFile[] files) throws Exception {		
+		//1. sequnce num  qna table insert
 		int res = qnaDAO.boardWrite(boardDTO);
-		//HDD에 파일을 저장하고 boardFile table insert
+						
+		//3. HDD에 파일저장하고 boardFile table insert
 		String path = servletContext.getRealPath("/resources/uploadQna");
-		System.out.println(path);
-		
-		for(MultipartFile file : files) {
-			BoardFileDTO boardFileDTO = new BoardFileDTO();
-			String fileName = fileSaver.saveByUtils(file, path);
-			boardFileDTO.setFileNum(boardDTO.getNum());
-			boardFileDTO.setBoard("2");
-			boardFileDTO.setFileName(fileName);
-			boardFileDTO.setOriName(file.getOriginalFilename());
-			boardFileDAO.fileInsert(boardFileDTO);
+				
+		for(MultipartFile file: files) {
+			BoardFileDTO boardFileVO = new BoardFileDTO();
+			String fileName = fileSaver.saveByTransfer(file, path);
+			boardFileVO.setNum(boardDTO.getNum());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriName(file.getOriginalFilename());
+			boardFileVO.setBoard("2");
+			boardFileDAO.fileInsert(boardFileVO);
 		}
+				
+		
 		return res;
 	}
 

@@ -35,6 +35,19 @@
 	  <div class="panel-body">${dto.regDate}</div>
 	</div>
 	
+	
+	
+		<c:forEach items="${dto.boardFileDTOs}" var="file">
+		<div>
+			<a href="../boardFile/fileDown?fileNum=${file.fileNum}">${file.oriName}</a>		
+		</div>
+		</c:forEach>
+	
+	
+	
+	
+	
+	
 		<div>
 			<a href="./${board}Update?num=${dto.num}" class="btn btn-default">Update</a>
 			<a href="./${board}Delete?num=${dto.num}" class="btn btn-danger">Delete</a>

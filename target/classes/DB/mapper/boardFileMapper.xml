@@ -10,4 +10,10 @@
 		values(file_seq.nextval,#{num},#{fileName},#{oriName},#{board})
 	</insert>  
   
+  	<select id="fileSelect" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+ 		select * from boardFile where fileNum = #{fileNum}
+  	</select>
+  	
+  	
+  
   </mapper>
