@@ -11,6 +11,9 @@ import com.sy.s5.AbstractTestCase;
 import com.sy.s5.board.BoardDTO;
 import com.sy.s5.member.MemberDAO;
 import com.sy.s5.member.MemberDTO;
+import com.sy.s5.qna.QnaDAO;
+import com.sy.s5.qna.QnaDTO;
+import com.sy.s5.qna.QnaDAO;
 
 
 public class NoticeDAOTest extends AbstractTestCase{
@@ -19,6 +22,8 @@ public class NoticeDAOTest extends AbstractTestCase{
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private QnaDAO qnaDAO;
 	
 	
 	public void daoIsNull() {
@@ -27,7 +32,7 @@ public class NoticeDAOTest extends AbstractTestCase{
 	
 	
 	
-	@Test
+
 	public void boardWriteTest() throws Exception {
 		String id="";
 		String pwd="";
@@ -77,6 +82,18 @@ public class NoticeDAOTest extends AbstractTestCase{
 	}
 	
 
+	@Test
+	public void qnaTest() throws Exception{
+		
+		QnaDTO qnaDTO = new QnaDTO(); 
+		qnaDTO.setTitle("test1");
+		qnaDTO.setWriter("tester1");
+		qnaDTO.setContents("testtest");
+		
+		
+		
+		qnaDAO.boardWrite(qnaDTO);
+	}
 	
 	
 	public void boardDeleteTest() throws Exception{

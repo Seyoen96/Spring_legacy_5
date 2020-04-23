@@ -2,6 +2,8 @@ package com.sy.s5.board;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sy.s5.util.Pager;
 
 public interface BoardService {
@@ -14,7 +16,7 @@ public interface BoardService {
 	public BoardDTO boardSelect(long num) throws Exception;
 	
 	//Insert
-	public int boardWrite(BoardDTO boardDTO) throws Exception;
+	public int boardWrite(BoardDTO boardDTO, MultipartFile[] files) throws Exception;
 	
 	//Update
 	public int boardUpdate(BoardDTO boardDTO) throws Exception;

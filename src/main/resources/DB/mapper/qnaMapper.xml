@@ -47,11 +47,23 @@
   	</update>
   	
   	
-  	<insert id="boardWrite" parameterType="QnaDTO" >
-  		INSERT INTO qna
-		values(board_seq.NEXTVAL, #{title},#{writer},#{contents},sysdate,
-		0,board_seq.CURRVAL,0,0)
-  	</insert>
+  	
+  	<insert id="boardWrite" parameterType="QnaDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			select board_seq.nextval from dual
+		</selectKey>
+		insert into qna values(
+		#{num},
+		#{title},
+		#{writer},
+		#{contents},
+		sysdate,
+		0,
+		#{num},
+		0,
+		0
+		)
+	</insert>
   	
   	<update id="boardReplyUpdate" parameterType="QnaDTO">
  		 update qna set step = step+1
@@ -67,7 +79,6 @@
   		(select step from qna where num=#{num})+1,
   		(select depth from qna where num=#{num})+1
   		 )
-  	
   	</insert>
   	
   

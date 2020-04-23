@@ -7,10 +7,13 @@
  	<typeAliases>
  		<typeAlias type="java.lang.Long" alias="Long"/>
  		<typeAlias type="java.lang.String" alias="String"/>
+ 		
  		<typeAlias type="com.sy.s5.notice.NoticeDTO" alias="NoticeDTO"/>
  		<typeAlias type="com.sy.s5.member.MemberDTO" alias="MemberDTO"/>
  		<typeAlias type="com.sy.s5.util.Pager" alias="Pager"/>
  		<typeAlias type="com.sy.s5.qna.QnaDTO" alias="QnaDTO"/>
  		<typeAlias type="com.sy.s5.member.memberFile.MemberFileDTO" alias="MemberFileDTO"/>
+ 		<typeAlias type="com.sy.s5.board.file.BoardFileDTO" alias="BoardFileDTO"/>
+ 		
  	</typeAliases>
  </configuration>

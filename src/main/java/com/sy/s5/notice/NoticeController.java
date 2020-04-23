@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sy.s5.board.BoardDTO;
@@ -51,19 +52,16 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(BoardDTO boardDTO, ModelAndView mv) throws Exception{
-		int res = noticeService.boardWrite(boardDTO);
-		
+	public ModelAndView boardWrite(MultipartFile[] files, NoticeDTO noticeDTO, ModelAndView mv) throws Exception{
+		int res = noticeService.boardWrite(noticeDTO, files);
 		if(res>0) {
 			//성공
 			mv.setViewName("redirect:./noticeList");			
 		} else {
-			//실패
-			//alert
 			mv.addObject("result", "Write Fail!");
 			mv.addObject("path", "./noticeList");
 			mv.setViewName("common/result");
-		}
+		}		
 		return mv;
 	}
 	

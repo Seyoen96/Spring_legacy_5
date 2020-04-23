@@ -19,6 +19,9 @@ public class QnaDAO implements BoardDAO{
 	private final String NAMESPACE = "com.sy.s5.qna.QnaDAO.";
 	
 	
+	
+	
+	
 	public int boardReplyUpdate(BoardDTO boardDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"boardReplyUpdate", boardDTO);
 	}

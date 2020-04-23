@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sy.s5.board.BoardDTO;
@@ -73,8 +74,8 @@ public class QnaController {
 	}
 	
 	@PostMapping("qnaWrite")
-	public ModelAndView boardWrite(BoardDTO boardDTO, ModelAndView mv) throws Exception{
-		int res = qnaService.boardWrite(boardDTO);		
+	public ModelAndView boardWrite(BoardDTO boardDTO, ModelAndView mv,MultipartFile[] files) throws Exception{
+		int res = qnaService.boardWrite(boardDTO,files);		
 		if(res>0) {
 			mv.setViewName("redirect:./qnaList");
 		} else {

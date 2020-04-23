@@ -24,7 +24,7 @@
   			like '%'||#{search}||'%'
   		</sql>
   		
-  		
+  	
   	
   	
    	 <select id="memberLogin" parameterType="MemberDTO" resultMap="loginResult">

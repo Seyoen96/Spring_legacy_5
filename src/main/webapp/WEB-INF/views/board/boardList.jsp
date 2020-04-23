@@ -100,6 +100,9 @@
 		</div>
 		
 		
+		<a href="./${board}Write" class="btn btn-danger">Write</a>
+		
+		
 		<c:catch>
 		<c:if test="${not empty member}">
 			<c:if test="${board eq 'qna'}">
