@@ -54,9 +54,7 @@ public class MemberService {
 	}
 	
 	public int fileDelete(String id,HttpSession session) throws Exception{
-		MemberFileDTO memberFileDTO = memberFileDAO.fileSelect(id);
-		
-		
+		MemberFileDTO memberFileDTO = memberFileDAO.fileSelect(id);	
 		int res = memberFileDAO.fileDelete(id);
 		if(res>0) {
 			String path = session.getServletContext().getRealPath("/resources/memberUpload");

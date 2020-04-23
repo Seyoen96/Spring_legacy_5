@@ -69,7 +69,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "memberPage")
-	public void memberPage(HttpSession session, Model model) throws Exception {
+	public void memberPage() throws Exception {
 	
 	}
 	

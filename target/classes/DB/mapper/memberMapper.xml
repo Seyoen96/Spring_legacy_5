@@ -11,8 +11,7 @@
   			<result column="name" property="name"/>
   			<result column="email" property="email"/>
   			<result column="phone" property="phone"/>
-  			<result column="age" property="age"/>
-  			
+  			<result column="age" property="age"/>		
   			<!-- 객체가 1개 인 경우   1:1 -->
   			<association property="memberFileDTO" javaType="MemberFileDTO">
   				<result column="fileName" property="fileName"/>
@@ -28,7 +27,7 @@
   		
   	
   	
-  	 <select id="memberLogin" parameterType="MemberDTO" resultMap="loginResult">
+   	 <select id="memberLogin" parameterType="MemberDTO" resultMap="loginResult">
 	  		select M.*, F.fileName, F.oriName
 			from member M left join memberFile F
 			on (M.id=F.id)
