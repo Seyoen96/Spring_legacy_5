@@ -1,6 +1,9 @@
 package com.sy.s5.notice;
 
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +55,8 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(MultipartFile[] files, BoardDTO noticeDTO, ModelAndView mv) throws Exception{
+	public ModelAndView boardWrite(MultipartFile[] files, BoardDTO noticeDTO, ModelAndView mv,HttpServletRequest request) throws Exception{
+		
 		int res = noticeService.boardWrite(noticeDTO, files);
 		if(res>0) {
 			//성공

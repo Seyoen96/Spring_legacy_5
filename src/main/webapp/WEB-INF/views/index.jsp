@@ -10,9 +10,21 @@
 </head>
 <body>
 <c:import url="./template/header.jsp"></c:import>
-<h1>Board Index Page</h1>
+	<button id="btn">BUTTON</button>
+	<h1>Board Index Page</h1>
 	
-	
+	<script type="text/javascript">
+		$('#btn').click(function(){
+			//jQuery ajax
+			//GET
+			alert("start");
+			$.get("./notice/noticeSelect?num=7", function(result){
+				console.log(result);
+			});
+			alert("finish");
+		});
+	</script>	
+		
 </body>
 </html>
 

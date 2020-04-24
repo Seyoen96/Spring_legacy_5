@@ -42,12 +42,12 @@
 </div>
 
 	<script type="text/javascript">
-		  $("#contents").summernote({
+	$(document).ready(function() {
+        $('#contents').summernote({
 			height:400	  
 		  });
+    });
 	</script>
-	
-	
 
 </body>
 </html>

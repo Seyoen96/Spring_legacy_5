@@ -31,7 +31,6 @@ public class FileSaver {
 		f = new File(f,fileName);
 		//b. HDD에 저장
 		FileCopyUtils.copy(file.getBytes(),f);
-		
 		return fileName;
 	}
 	
@@ -40,9 +39,8 @@ public class FileSaver {
 	//파일명 생성 
 	private String makeNameByUUID(String name) throws Exception {
 		
-		String result = UUID.randomUUID().toString(); 
-		String type =name.substring(name.lastIndexOf("."));
-		result = result+type;
+		String result = UUID.randomUUID().toString();
+		result = result+name;
 		System.out.println(result);
 		return result;
 	}	

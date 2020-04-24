@@ -15,6 +15,7 @@
  		<typeAlias type="com.sy.s5.qna.QnaDTO" alias="QnaDTO"/>
  		<typeAlias type="com.sy.s5.member.memberFile.MemberFileDTO" alias="MemberFileDTO"/>
  		<typeAlias type="com.sy.s5.board.file.BoardFileDTO" alias="BoardFileDTO"/>
+ 		<typeAlias type="com.sy.s5.memo.MemoVO" alias="MemoVO"/>
  		
  	</typeAliases>
  </configuration>

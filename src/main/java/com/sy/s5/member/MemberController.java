@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +31,19 @@ public class MemberController {
 	public void memberLogin(@CookieValue(value = "cId", required=false) String cId,Model model) throws Exception{
 //		System.out.println(cId);
 		model.addAttribute("cId", cId);
+	}
+	
+	@PostMapping("memberIdCheck")
+	public ModelAndView memberIdCheck(MemberDTO memberDTO, ModelAndView mv) throws Exception {
+		
+		int check = 0;
+		if(memberService.memberIdCheck(memberDTO)==null) {
+			//id가 중복이 아닌 경우
+			check = 1;
+		}
+		mv.addObject("result", check);
+		mv.setViewName("common/ajaxResult");
+		return mv;
 	}
 	
 	

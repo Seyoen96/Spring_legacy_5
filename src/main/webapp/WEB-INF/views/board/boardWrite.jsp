@@ -17,43 +17,38 @@
 		<div class="row">
 		<h1>${board} Write Page</h1>
 		
-		<form action="../${board}/${board}Write" method="POST" enctype="multipart/form-data">
+		<form action="../${board}/${board}Write" id="frm" method="POST" enctype="multipart/form-data">
 		
 			<div class="form-group">
 			  <label for="title">Title:</label>
-			  <input type="text" class="form-control" name="title">
+			  <input type="text" class="form-control" id="title" name="title">
 			</div>
 			<div class="form-group">
 			  <label for="wrtier">Writer:</label>
-			  <input type="text" class="form-control" name="writer">
+			  <input type="text" class="form-control" value="${member.id}" readonly="readonly" name="writer">
 			</div>
 				
 			<div class="form-group">
 			  <label for="contents">Contents:</label>
-			  <textarea class="form-control" id="contents" rows="5" name="contents"></textarea>
+			  <textarea class="form-control cont" id="contents" rows="5" name="contents"></textarea>
 			</div>
 			
-			<div class="form-group">
-			  <label for="files">File:</label>
-			  <input type="file" class="form-control" name="files">
-			  <input type="file" class="form-control" name="files">
+			<input type="button" id="add" class="btn btn-info" value="AddFile">
+			<div id="file">
+				
 			</div>
 			
+	
 			
-			
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button type="button" id="wrBtn" class="btn btn-default">Submit</button>
 		</form>
 		<h1>${board} Write Page</h1>
 	
 	</div>
 </div>
 
-	<script type="text/javascript">
-	$(document).ready(function() {
-        $('#summernote').summernote({
-			height:400	  
-		  });
-    });
+	<script type="text/javascript" src="../resources/js/boardForm.js">
+		
 	</script>
 
 

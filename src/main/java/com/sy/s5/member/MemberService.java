@@ -28,6 +28,10 @@ public class MemberService {
 		return memberDAO.memberLogin(memberDTO);
 	}
 	
+	public MemberDTO memberIdCheck(MemberDTO memberDTO) throws Exception{
+		return memberDAO.memberIdCheck(memberDTO);
+	}
+	
 	public int memberJoin(MemberDTO memberDTO, MultipartFile pic,HttpSession session) throws Exception{
 		//member 저장 먼저 실행
 		int res = memberDAO.memberJoin(memberDTO);

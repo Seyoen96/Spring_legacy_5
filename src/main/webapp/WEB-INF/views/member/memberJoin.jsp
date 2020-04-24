@@ -72,7 +72,19 @@
 	  </form>
 	</div>
 
-	
+	<script type="text/javascript">
+		$("#id").on("blur",function(){		
+			var id = $('#id').val();
+			$.post("./memberIdCheck",{id:id}, function(result){
+				result = result.trim();
+				if(result>0){
+					alert("사용 가능한 ID입니다");
+				} else{
+					alert("중복된 ID 입니다");
+				}	
+			});
+		});	
+	</script>
 	
 	
 		
