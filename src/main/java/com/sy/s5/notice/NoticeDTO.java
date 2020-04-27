@@ -20,11 +20,7 @@ public class NoticeDTO extends BoardDTO {
 	
 	private List<BoardFileDTO> boardFileDTOs;
 
-	public List<BoardFileDTO> getBoardFileDTOs() {
-		if(this.boardFileDTOs==null) {
-			
-		}
-		
+	public List<BoardFileDTO> getBoardFileDTOs() {	
 		return boardFileDTOs;
 	}
 

@@ -15,14 +15,15 @@
 <div class="container">
 	<div class="row">
 	<h1>${board} List Page</h1>
-		 <form action="./${board}List" class= "col-xs-6">
-		    <div class="input-group">
+		 <form action="./${board}List" class="form-inline">
+		    <div class="input-group input-group-sm col-xs-2">
 		    	<select class="form-control" id="sel1" name ="kind">
 				    <option value="bt">Title</option>
 				    <option value="bc">Contents</option>
 				    <option value="bw">Writer</option>
 				  </select>
-		    
+		  </div>
+		    <div class="input-group input-group-sm col-xs-4">
 		      <input type="text" class="form-control" placeholder="Search" name="search">
 		      <div class="input-group-btn">
 		        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>

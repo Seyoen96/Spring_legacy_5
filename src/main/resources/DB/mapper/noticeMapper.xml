@@ -72,6 +72,9 @@
   	</select>
   	
   	
+  	
+  	
+  	
   	<select id="boardNum" resultType="Long">
   		select board_seq.nextval from dual
   	</select>

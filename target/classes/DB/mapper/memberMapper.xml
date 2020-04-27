@@ -95,4 +95,14 @@
 	  	delete member where id=#{id}
 	  </delete>
 	  
+	  <delete id="memberDeletes" parameterType="List">
+	  	delete member where id in 
+	  	<foreach item="id" collection="list" open="(" separator="," close=")">
+	  		#{id}
+	  	</foreach>
+	  
+	  </delete>
+	  
+	  
+	  
   </mapper>

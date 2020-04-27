@@ -54,13 +54,15 @@ public class NoticeService implements BoardService {
 		int res = noticeDAO.boardWrite(boardDTO);
 		
 		for(MultipartFile file:files) {
-			BoardFileDTO boardFileDTO = new BoardFileDTO();
-			String fileName = fileSaver.saveByTransfer(file,path);			
-			boardFileDTO.setNum(boardDTO.getNum());
-			boardFileDTO.setBoard("1");
-			boardFileDTO.setFileName(fileName);
-			boardFileDTO.setOriName(file.getOriginalFilename());
-			boardFileDAO.fileInsert(boardFileDTO);		
+			if(file.getSize()>0) {
+				BoardFileDTO boardFileDTO = new BoardFileDTO();
+				String fileName = fileSaver.saveByTransfer(file,path);			
+				boardFileDTO.setNum(boardDTO.getNum());
+				boardFileDTO.setBoard("1");
+				boardFileDTO.setFileName(fileName);
+				boardFileDTO.setOriName(file.getOriginalFilename());
+				boardFileDAO.fileInsert(boardFileDTO);	
+			}	
 		}
 		
 		

@@ -15,23 +15,25 @@
 <div class="container">
 	<div class="row">
 	<h1>Member List Page</h1>
-		 <form action="./memberList" class= "col-xs-6">
-		    <div class="input-group">
+		 <form action="./memberList" class="form-inline">
+		  <div class="input-group input-group-sm col-xs-2">
 		    	<select class="form-control" id="sel1" name ="kind">
 				    <option value="ii">ID</option>
 				    <option value="nn">Name</option>
 				    <option value="pp">Phone</option>
 				    <option value="ee">Email</option>
-				  </select>
-		    
+				  </select>	  
+			 </div>
+		    	<div class="input-group input-group-sm col-xs-4">
 		      <input type="text" class="form-control" placeholder="Search" name="search">
 		      <div class="input-group-btn">
 		        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		      </div>
+		      
+		    </div>
 		    </div>
 		  </form>
 	
-	
+	<div id ="result">
 		<table class="table table-hover">
 		<thead>
 			<tr>
@@ -40,15 +42,18 @@
 				<td>Phone</td>
 				<td>Email</td>
 				<td>Age</td>
+				<td><input type="checkbox" id="ch1"> <button class="btn btn-danger" id="btnD">Delete</button> </td>
 			</tr>
 		</thead>
-			<c:forEach items="${list}" var="dto">
+			<c:forEach items="${list}" var="dto" varStatus="i">
 				<tr>
-					<td><a href="./memberPage?id=${dto.id}">${dto.id}</a></td>
+					<td id="id${i.index}"><a href="./memberPage?id=${dto.id}">${dto.id}</a></td>
 					<td>${dto.name}</td>
 					<td>${dto.phone}</td>
 					<td>${dto.email}</td>
 					<td>${dto.age}</td>
+					<td><input type="checkbox" name="del" title="id${i.index}" id="${dto.id}" class="ch2"></td>
+					<td><input type="hidden" class="ids" value="${dto.id}"></td>
 				</tr>
 			</c:forEach>			
 		</table>
@@ -67,11 +72,86 @@
 			</ul>
 		</div>
 		
-		
+		</div>
 	
 	</div>
 </div>
 
+	
+	<script type="text/javascript">
+	
+		$("#result").on("click", "#btnD", function() {
+			var ids = [];//빈 배열 생성
+			$(".ch2").each(function() {
+				if($(this).prop("checked")){
+					//var id = $(this).attr("title");
+					//alert($("#"+id).text());
+					
+					ids.push($(this).attr("id"));
+				}
+			});
+			
+			console.log(ids);
+			//foreach 끝
+			$.ajax({
+				type:"get",
+				traditional:true,
+				url:"./memberDeletes",
+				data: {
+					ids:ids
+				},
+				success:function(data){
+					$.get("./memberLists", function(data) {
+						$("#result").html(data.trim());
+					});
+				}
+				
+			});
+		});
+		
+		
+		//////////////////////////////////
+		$("#result").on("click", "#ch1", function() {
+			$(".ch2").prop("checked", $(this).prop("checked"));
+			
+		});
+		
+		
+		///////////////////////////////////
+		$("#result").on("click", ".ch2", function() {
+			
+			var result=true;
+			$(".ch2").each(function() {
+				if(!$(this).prop("checked")){
+					result=false;
+				}
+			});
+			
+			$("#ch1").prop("checked", result);
+		});
+		
+
+
+		/////////////////////////////////////////////////////////
+		// 인덱스 번호로 id 찾아오기 - my
+//		$("#btnD").click(function(){
+//			$(".ch2").each(function(){
+//				if($(this).prop("checked")==true){
+//					var num = $(".ch2").index(this);
+//					
+//					$(".ids").each(function(){
+//						if($(".ids").index(this)==num){
+//							alert($(this).val());	
+//						}
+//					});
+//				}
+//			});
+//		});
+				
+		
+		
+	</script>
+	
 
 
 </body>

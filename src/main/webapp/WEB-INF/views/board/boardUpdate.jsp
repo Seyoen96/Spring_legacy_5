@@ -34,10 +34,22 @@
 		  <textarea class="form-control" rows="5" id="contents" name="contents">${dto.contents}</textarea>
 		</div>
 		
+		<div class="form-group">
+			<label for="files">Files:</label>
+			<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+				<p class="">${fileDTO.oriName}<i class="glyphicon glyphicon-remove remove fileDelete" title="${fileDTO.fileNum}"></i></p>
+			
+			</c:forEach>
+				
+			<p></p>
+			
+		</div>
+		
+		
 		<button type="submit" class="btn btn-default">Update</button>
 		</form>
 		
-	
+		
 	</div>
 </div>
 
@@ -47,6 +59,20 @@
 			height:400	  
 		  });
     });
+	
+	$(".fileDelete").click(function(){
+		var s = $(this);
+		
+		$.post("../boardFile/fileDelete",{fileNum:$(this).attr("title")},function(result){			
+			if(result.trim()>0){
+				s.parent().remove();				
+			} else{
+				alert("delete fail");
+			}
+		});
+		
+	});
+	
 	</script>
 
 </body>

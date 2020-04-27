@@ -24,6 +24,10 @@ public class MemberService {
 	private MemberFileDAO memberFileDAO;
 	
 	
+	public int memberDeletes(List<String> list) throws Exception{
+		return memberDAO.memberDeletes(list);
+	}
+	
 	public MemberDTO memberLogin(MemberDTO memberDTO) throws Exception{
 		return memberDAO.memberLogin(memberDTO);
 	}

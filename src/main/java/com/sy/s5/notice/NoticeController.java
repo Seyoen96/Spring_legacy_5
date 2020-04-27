@@ -1,6 +1,5 @@
 package com.sy.s5.notice;
 
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,6 +89,9 @@ public class NoticeController {
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
 	public ModelAndView boardUpdate(long num, ModelAndView mv) throws Exception{	
 		BoardDTO boardDTO = noticeService.boardSelect(num);
+		
+		
+		
 		mv.addObject("dto",boardDTO);
 		mv.setViewName("board/boardUpdate");
 		return mv;

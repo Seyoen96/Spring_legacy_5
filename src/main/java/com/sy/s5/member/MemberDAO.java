@@ -43,5 +43,8 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE+"memberCount", memberPager);
 	}
 	
+	public int memberDeletes(List<String> list) {
+		return sqlSession.delete(NAMESPACE+"memberDeletes", list);
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.sy.s5.member;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -163,6 +164,29 @@ public class MemberController {
 			mv.addObject("path", "./memberPage");
 		}
 		mv.setViewName("common/result");
+		return mv;
+	}
+	
+	@GetMapping("memberDeletes")
+	public ModelAndView memberDeletes(String[] ids) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//배열을 List로 변환
+		List<String> list = Arrays.asList(ids);
+		int res = memberService.memberDeletes(list);
+		
+		mv.addObject("result", res);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+		
+	}
+	
+	@GetMapping("memberLists")
+	public ModelAndView memberLists(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<MemberDTO> ar = memberService.memberList(pager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("member/memberLists");
 		return mv;
 	}
 	

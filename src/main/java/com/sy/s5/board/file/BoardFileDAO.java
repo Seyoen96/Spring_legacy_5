@@ -19,6 +19,11 @@ public class BoardFileDAO {
 		return sqlSession.selectOne(NAMESPACE+"fileSelect", boardFileDTO);
 	}
 	
+	public int fileDelete(long fileNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDelete", fileNum);
+		
+	}
+	
 	
 	
 }

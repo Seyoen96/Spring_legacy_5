@@ -75,14 +75,29 @@
 	<script type="text/javascript">
 		$("#id").on("blur",function(){		
 			var id = $('#id').val();
-			$.post("./memberIdCheck",{id:id}, function(result){
-				result = result.trim();
-				if(result>0){
-					alert("사용 가능한 ID입니다");
-				} else{
-					alert("중복된 ID 입니다");
-				}	
+			
+			$.ajax({
+				type: "post", 			//method 형식
+				url : "./memberIdCheck",
+				data: {id:id},			//parameter
+				success:function(data){
+					alert(data);
+				},
+				error:function(){
+					alert("error 발생");
+				}
+				
 			});
+
+//			$.post("./memberIdCheck",{id:id}, function(result){
+//				result = result.trim();
+//				if(result>0){
+//					alert("사용 가능한 ID입니다");
+//				} else{
+//					alert("중복된 ID 입니다");
+//				}	
+//			});
+
 		});	
 	</script>
 	
