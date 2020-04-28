@@ -59,8 +59,14 @@
 			    onImageUpload: function(files) {
 			    	$.ajax({
 			    		type:"POST",
-			    		url : "../boardFile/fileInsert"
-			    		
+			    		url : "../boardFile/fileInsert",
+			    		enctype: "multipart/form-data",
+			    		cache:false,
+			    		contentType:false,
+			    		processData:false,
+			    		success:function(imageName){
+			    			
+			    		}
 			    	});
 			    }
 			  }
