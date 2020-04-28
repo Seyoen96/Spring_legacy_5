@@ -4,9 +4,16 @@
 
 	$(document).ready(function() {
         $('#contents').summernote({
-			height:400	  
+			height:400,	
+			callbacks: {
+			    onImageUpload: function(files) {
+			     console.log("upload");
+			    
+			    }
+			  }
 		  });
     });
+	
 	
 	
 	$('#wrBtn').on("click",function(){
@@ -42,6 +49,8 @@
 	
 	
 	var cnt =1;
+	
+	
 	$('#add').click(function(){
 		if(cnt<6){
 			$('#file').append('<div class="form-group" id="f'+cnt+'">	 <label for="files">File :</label><input type="file" class="form-control files" name="files"><i class="glyphicon glyphicon-remove remove"></i> </div>');

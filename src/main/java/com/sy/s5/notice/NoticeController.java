@@ -89,19 +89,21 @@ public class NoticeController {
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
 	public ModelAndView boardUpdate(long num, ModelAndView mv) throws Exception{	
 		BoardDTO boardDTO = noticeService.boardSelect(num);
-		
+		NoticeDTO noticeDTO = (NoticeDTO) boardDTO;
 		
 		
 		mv.addObject("dto",boardDTO);
+		mv.addObject("size", noticeDTO.getBoardFileDTOs().size());
 		mv.setViewName("board/boardUpdate");
 		return mv;
 	}
 	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String boardUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception{
-		int res = noticeService.boardUpdate(boardDTO);
-		String path ="";
-		
+	public String boardUpdate(BoardDTO boardDTO, MultipartFile[] files) throws Exception{
+			
+		int res = noticeService.boardUpdate(boardDTO, files);
+		System.out.println("update");
+		String path ="";		
 		if(res>0) {
 			path="redirect:./noticeList";		
 		} else {

@@ -47,9 +47,27 @@
 	</div>
 </div>
 
-	<script type="text/javascript" src="../resources/js/boardForm.js">
-		
+
+
+	<!-- <script type="text/javascript" src="../resources/js/boardForm.js"></script> -->
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+        $('#contents').summernote({
+			height:400,	
+			callbacks: {
+			    onImageUpload: function(files) {
+			    	$.ajax({
+			    		type:"POST",
+			    		url : "../boardFile/fileInsert"
+			    		
+			    	});
+			    }
+			  }
+		  });
+    });
 	</script>
+	
 
 
 </body>

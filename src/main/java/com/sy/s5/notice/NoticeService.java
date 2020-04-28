@@ -1,6 +1,7 @@
 package com.sy.s5.notice;
 
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -43,6 +44,7 @@ public class NoticeService implements BoardService {
 		noticeDAO.hitUpdate(num);
 		return noticeDAO.boardSelect(num);
 	}
+	
 
 	@Override
 	public int boardWrite(BoardDTO boardDTO,MultipartFile[] files) throws Exception {
@@ -64,20 +66,48 @@ public class NoticeService implements BoardService {
 				boardFileDAO.fileInsert(boardFileDTO);	
 			}	
 		}
-		
-		
 		return res;
 	}
+	
 
 	@Override
-	public int boardUpdate(BoardDTO boardDTO) throws Exception {
-		return noticeDAO.boardUpdate(boardDTO);
+	public int boardUpdate(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		//HDD file save
+		String path = servletContext.getRealPath("/resources/uploadnotice"); 
+		System.out.println(path);
+		int res = noticeDAO.boardUpdate(boardDTO);
+		for(MultipartFile file : files) {
+			if(file.getSize()>0) {
+				BoardFileDTO boardFileDTO = new BoardFileDTO();
+				String fileName = fileSaver.saveByTransfer(file, path);
+				boardFileDTO.setNum(boardDTO.getNum());
+				boardFileDTO.setBoard("1");
+				boardFileDTO.setFileName(fileName);
+				boardFileDTO.setOriName(file.getOriginalFilename());
+				res = boardFileDAO.fileInsert(boardFileDTO);
+			}					
+		}
+		return res;
 	}
+	
 
 	@Override
 	public int boardDelete(long num) throws Exception {
+			
+		List<BoardFileDTO> list = boardFileDAO.fileList(num);
+		//1. HDD에서 해당 파일들을 삭제
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		for(BoardFileDTO fileDTO: list) {
+			fileSaver.deleteFile(fileDTO.getFileName(), path);
+		}
+		//2.DB에서 삭제
+		boardFileDAO.fileDeleteAll(num);
+		
 		return noticeDAO.boardDelete(num);
 	}
+	
+	
+	
 	
 	
 	

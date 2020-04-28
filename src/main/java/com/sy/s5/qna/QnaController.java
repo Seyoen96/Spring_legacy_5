@@ -97,8 +97,8 @@ public class QnaController {
 	}
 	
 	@PostMapping("qnaUpdate")
-	public String boardUpdate(BoardDTO boardDTO) throws Exception{
-		int res = qnaService.boardUpdate(boardDTO);
+	public String boardUpdate(BoardDTO boardDTO, MultipartFile[] files) throws Exception{
+		int res = qnaService.boardUpdate(boardDTO, files);
 		String path="";
 		if(res>0) {
 			path="redirect:./qnaList";

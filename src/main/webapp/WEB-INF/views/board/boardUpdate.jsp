@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,9 @@
 
 	<div class="container">
 		<div class="row">
-		<h1>${board} Update Page</h1>
+		<h1>${fn:toUpperCase(board)} ${board} Update Page</h1>
 		
-		<form action="../${board}/${board}Update?num=${dto.num}" method="POST">
+		<form action="../${board}/${board}Update?num=${dto.num}" method="POST" enctype="multipart/form-data">
 		
 		<div class="form-group">
 		  <label for="title">Title:</label>
@@ -34,15 +35,16 @@
 		  <textarea class="form-control" rows="5" id="contents" name="contents">${dto.contents}</textarea>
 		</div>
 		
+		<input type="button" id="add" class="btn btn-info" value="AddFile">
+			<div id="file">
+				
+			</div>
+		
 		<div class="form-group">
 			<label for="files">Files:</label>
 			<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
-				<p class="">${fileDTO.oriName}<i class="glyphicon glyphicon-remove remove fileDelete" title="${fileDTO.fileNum}"></i></p>
-			
+				<p class="">${fileDTO.oriName}<i class="glyphicon glyphicon-remove remove fileDelete" id="${fileDTO.fileNum}" title="${fileDTO.board}"></i></p>			
 			</c:forEach>
-				
-			<p></p>
-			
 		</div>
 		
 		
@@ -52,7 +54,10 @@
 		
 	</div>
 </div>
-
+	
+	
+	
+	<script type="text/javascript" src="../resources/js/boardForm.js"></script>	
 	<script type="text/javascript">
 	$(document).ready(function() {
         $('#contents').summernote({
@@ -60,17 +65,29 @@
 		  });
     });
 	
-	$(".fileDelete").click(function(){
-		var s = $(this);
-		
-		$.post("../boardFile/fileDelete",{fileNum:$(this).attr("title")},function(result){			
-			if(result.trim()>0){
-				s.parent().remove();				
-			} else{
-				alert("delete fail");
-			}
-		});
-		
+	
+	//리스트 항목 갯수 받아오기 3가지 방법
+	var size=${size};
+	size = ${dto.boardFileDTOs.size()};
+	size = ${fn:length(dto.boardFileDTOs)};
+	
+	
+	//alert("file :"+size);
+	
+	cnt = cnt+size;
+	$(".fileDelete").click(function(){	
+		var check=confirm("삭제 확인");
+		if(check){
+			var s = $(this);		
+			$.post("../boardFile/fileDelete",{fileNum:$(this).attr("id"), board:$(this).attr("title")},function(result){			
+				if(result.trim()>0){
+					s.parent().remove();	
+					cnt--;
+				} else{
+					alert("delete fail");
+				}
+			});		
+		}
 	});
 	
 	</script>

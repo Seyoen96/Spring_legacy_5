@@ -1,5 +1,7 @@
 package com.sy.s5.board.file;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,9 +21,16 @@ public class BoardFileDAO {
 		return sqlSession.selectOne(NAMESPACE+"fileSelect", boardFileDTO);
 	}
 	
-	public int fileDelete(long fileNum) throws Exception{
-		return sqlSession.delete(NAMESPACE+"fileDelete", fileNum);
-		
+	public int fileDelete(BoardFileDTO boardFileDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDelete", boardFileDTO);
+	}
+	
+	public int fileDeleteAll(Long num) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDeleteAll", num);	
+	}
+	
+	public List<BoardFileDTO> fileList(Long num) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"fileList", num);
 	}
 	
 	
