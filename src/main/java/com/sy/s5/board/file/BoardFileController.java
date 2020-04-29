@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,13 +49,14 @@ public class BoardFileController {
 	
 	
 	@PostMapping("fileDelete")
-	public ModelAndView fileDelete(BoardFileDTO boardFileDTO) throws Exception{
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public int fileDelete(BoardFileDTO boardFileDTO) throws Exception{
+//		ModelAndView mv = new ModelAndView();
 		
 		int res = boardFileService.fileDelete(boardFileDTO);
-		mv.addObject("result", res);
-		mv.setViewName("common/ajaxResult");
-		return mv;
+//		mv.addObject("result", res);
+//		mv.setViewName("common/ajaxResult");
+		return res;
 	}
 	
 	

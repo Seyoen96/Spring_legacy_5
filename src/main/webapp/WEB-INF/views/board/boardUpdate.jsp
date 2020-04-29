@@ -80,7 +80,7 @@
 		if(check){
 			var s = $(this);		
 			$.post("../boardFile/fileDelete",{fileNum:$(this).attr("id"), board:$(this).attr("title")},function(result){			
-				if(result.trim()>0){
+				if(result>0){
 					s.parent().remove();	
 					cnt--;
 				} else{

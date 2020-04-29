@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sy.s5.util.Pager;
@@ -15,6 +16,7 @@ import com.sy.s5.util.Pager;
 @Controller
 @RequestMapping("/memo/**")
 public class MemoController {
+	
 	@Autowired
 	private MemoService memoService;
 	
@@ -33,14 +35,10 @@ public class MemoController {
 	
 	
 	@PostMapping("memoInsert")
-	public ModelAndView memoInsert(MemoVO memoVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public int memoInsert(MemoVO memoVO) throws Exception{
 		int res = memoService.memoInsert(memoVO);
-		
-		mv.addObject("result", res);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
+		return res;
 	}
 	
 	
