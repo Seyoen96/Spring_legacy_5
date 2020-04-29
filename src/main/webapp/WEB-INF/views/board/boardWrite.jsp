@@ -49,30 +49,8 @@
 
 
 
-	<!-- <script type="text/javascript" src="../resources/js/boardForm.js"></script> -->
-	<script type="text/javascript">
+	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	
-	$(document).ready(function() {
-        $('#contents').summernote({
-			height:400,	
-			callbacks: {
-			    onImageUpload: function(files) {
-			    	$.ajax({
-			    		type:"POST",
-			    		url : "../boardFile/fileInsert",
-			    		enctype: "multipart/form-data",
-			    		cache:false,
-			    		contentType:false,
-			    		processData:false,
-			    		success:function(imageName){
-			    			
-			    		}
-			    	});
-			    }
-			  }
-		  });
-    });
-	</script>
 	
 
 

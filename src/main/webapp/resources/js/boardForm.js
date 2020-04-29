@@ -2,6 +2,27 @@
  * 
  */
 
+
+	var cnt =1;
+	
+	$('#file').on("click",".remove",function(){
+		$(this).parent().remove();
+		cnt--;
+	});
+	
+	
+	$('#add').click(function(){
+		if(cnt<6){
+			$('#file').append('<div class="form-group" id="f'+cnt+'">	 <label for="files">File :</label><input type="file" class="form-control files" name="files"><i class="glyphicon glyphicon-remove remove"></i> </div>');
+			cnt++;
+		} else{
+			alert('파일은 최대 5개');
+		}	
+	});
+
+
+/////////////////////////////////////////////////////////
+/*
 	$(document).ready(function() {
         $('#contents').summernote({
 			height:400,	
@@ -13,9 +34,62 @@
 			  }
 		  });
     });
+    */
+	//////////////////////////////////////////////////////////////////////////
+	
+	
+        $('#contents').summernote({
+			height:400,	
+			callbacks: {
+				
+			    onImageUpload: function(files, editor) {
+			    	var formData = new FormData();	//<form></form>
+			    	formData.append('files',files[0]);	//<input type="file" name="files">
+			    	
+			    	$.ajax({
+			    		type:"POST",
+			    		url : "../boardFile/fileInsert",
+			    		data: formData, 
+			    		enctype: "multipart/form-data",
+			    		cache:false,
+			    		contentType:false,
+			    		processData:false,
+			    		success:function(imageName){
+			    			imageName = imageName.trim();
+			    			$("#contents").summernote('editor.insertImage',imageName);
+			    		}
+			    	});
+			    },///onImageUpload
+			    
+			    onMediaDelete:function(files){
+			    	var fileName = $(files[0]).attr("src");
+			    	fileName = fileName.substring(fileName.lastIndexOf("/")+1);
+			    	console.log(fileName);
+			    	
+			    	$.ajax({
+			    		type: "POST",
+			    		url: "../boardFile/summerDelete",
+			    		data:{fileName,fileName},
+			    		success:function(data){
+			    			console.log(data.trim());
+			    			
+			    		}			    		
+			    		
+			    	});
+		
+			    	
+			    	
+			    }//onMediaDelete
+			    
+			    
+			  }//callBack
+		  });
+    
 	
 	
 	
+	
+	////////////////////////////////////////////////////////////////////////
 	$('#wrBtn').on("click",function(){
 		//title, contents 데이터 유무 검증
 		var title = $('#title').val();
@@ -48,20 +122,6 @@
 	});
 	
 	
-	var cnt =1;
 	
 	
-	$('#add').click(function(){
-		if(cnt<6){
-			$('#file').append('<div class="form-group" id="f'+cnt+'">	 <label for="files">File :</label><input type="file" class="form-control files" name="files"><i class="glyphicon glyphicon-remove remove"></i> </div>');
-			cnt++;
-		} else{
-			alert('파일은 최대 5개');
-		}	
-	});
 	
-	
-	$('#file').on("click",".remove",function(){
-		$(this).parent().remove();
-		cnt--;
-	});
