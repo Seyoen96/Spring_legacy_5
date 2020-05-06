@@ -36,13 +36,13 @@
 	</div>
 	
 	
-	
-		<c:forEach items="${dto.boardFileDTOs}" var="file">
-		<div>
-			<a href="../boardFile/fileDown?fileNum=${file.fileNum}">${file.oriName}</a>		
-		</div>
-		</c:forEach>
-	
+		<c:catch>
+			<c:forEach items="${dto.boardFileDTOs}" var="file">
+				<div>
+					<a href="../boardFile/fileDown?fileNum=${file.fileNum}">${file.oriName}</a>		
+				</div>
+			</c:forEach>
+		</c:catch>
 	
 	
 	
