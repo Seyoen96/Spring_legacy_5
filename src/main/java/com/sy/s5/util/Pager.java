@@ -12,11 +12,12 @@ public class Pager {
 	private long curBlock;
 	private long startNum;
 	private long lastNum;
+
+	
 	
 	private String kind;
 	private String search;
-	
-	
+
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
@@ -32,6 +33,10 @@ public class Pager {
 		}
 		return search;
 	}
+	
+	
+	
+	
 	public long getStartRow() {
 		return startRow;
 	}
